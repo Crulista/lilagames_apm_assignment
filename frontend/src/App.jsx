@@ -317,6 +317,7 @@ export default function App(){
       </div>
 
       {activeTab==='explorer'&&<>
+       <div className="sidebar-top">
         <div className="sidebar-section"><h3>Filters</h3>
           <div className="filter-row">
             <select value={filterMap} onChange={e=>{setFilterMap(e.target.value);setSelectedMatch(null)}}><option value="all">All Maps</option>{mapOptions.map(m=><option key={m} value={m}>{m}</option>)}</select>
@@ -347,7 +348,8 @@ export default function App(){
           </div>)}
         </div>
         {zoom>1&&<div className="sidebar-section"><h3>Zoom {zoom.toFixed(1)}x</h3><button className="btn" onClick={()=>{setZoom(1);setPanX(0);setPanY(0)}} style={{width:'100%'}}>Reset</button><p className="sidebar-hint" style={{marginTop:3}}>Scroll to zoom, drag to pan</p></div>}
-        <div className="sidebar-section" style={{padding:'6px 12px 2px'}}><h3>Matches ({filteredMatches.length})</h3></div>
+       </div>
+         <div className="sidebar-section" style={{padding:'6px 12px 2px'}}><h3>Matches ({filteredMatches.length})</h3></div>
         <div className="sidebar-scroll"><div style={{padding:'0 12px 12px'}}>
           {filteredMatches.slice(0,80).map(m=>(
             <div key={m.id} className={`match-item ${selectedMatch?.id===m.id?'selected':''}`} onClick={()=>setSelectedMatch(m)}>
