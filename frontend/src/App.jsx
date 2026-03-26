@@ -11,7 +11,7 @@ const LOCAL_MAPS = {
   Lockdown: 'minimaps/Lockdown_Minimap.jpg',
 }
 
-const API_URL = window.LILA_API_URL || 'https://web-production-4d33e.up.railway.app/'
+const API_URL = window.LILA_API_URL || 'https://web-production-4d33e.up.railway.app'
 
 export default function App(){
   const[activeTab,setActiveTab]=useState('explorer')
