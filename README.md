@@ -2,7 +2,7 @@
 
 A web-based tool for Level Designers to explore player behavior, identify map design issues, and generate actionable insights from LILA BLACK match telemetry.
 
-**Live Demo:** [Frontend URL] | **Backend API:** [Railway URL]
+**Live Demo:** [[Frontend URL]](https://lilagames-apm-assignment.vercel.app/) | **Backend API:** [[Railway URL]](https://web-production-4d33e.up.railway.app/docs)
 
 ## Features
 
