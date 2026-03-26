@@ -2,7 +2,7 @@
 
 These insights are drawn from 5 days of LILA BLACK production data (February 10-14, 2026): 796 matches, 89,000 events, 3 maps, 339 unique players. The tool generates these analyses dynamically, but below are the key findings from the full dataset.
 
-## 1. Storm Deaths Cluster at Specific Chokepoints in Lockdown, Not Randomly Along Map Edges
+## 1. Storm Deaths Cluster at Specific Chokepoints in "Lockdown" map, Not Randomly Along Map Edges
 
 KilledByStorm events are not uniformly distributed near map boundaries. They cluster in 2-3 specific locations per map, suggesting terrain bottlenecks where players consistently get caught by the advancing storm.
 
