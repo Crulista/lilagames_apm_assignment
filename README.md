@@ -1,8 +1,8 @@
-# LILA BLACK — Player Journey Visualizer
+# LILA BLACK - Player Journey Visualizer
 
 A web-based tool for Level Designers to explore player behavior across LILA BLACK's three maps.
 
-**Live Demo:** [URL here after deployment]
+**Live Demo:** https://lilagames-assignment.vercel.app/
 
 ## Features
 
