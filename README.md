@@ -2,7 +2,7 @@
 
 A web-based tool for Level Designers to explore player behavior across LILA BLACK's three maps.
 
-**Live Demo:** https://lilagames-assignment.vercel.app/
+**Live Demo:** https://lilagames-apm-assignment.vercel.app/
 
 ## Features
 
