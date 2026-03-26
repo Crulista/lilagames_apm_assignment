@@ -4,6 +4,8 @@ A web-based tool for Level Designers to explore player behavior, identify map de
 
 **Live Demo:** [[Frontend URL]](https://lilagames-apm-assignment.vercel.app/) | **Backend API:** [[Railway URL]](https://web-production-4d33e.up.railway.app/docs)
 
+**Other Demo with hardcoded dataset:** [Other URL]
+
 ## Features
 
 **Match Explorer**
