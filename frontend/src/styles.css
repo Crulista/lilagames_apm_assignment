@@ -135,39 +135,6 @@ select:focus, input:focus { border-color:#ff4444; }
 
 /* Macbook fix */
 .sidebar-top { max-height:45vh; overflow-y:auto; flex-shrink:0; }
-```
-
-Then in `src/App.jsx`, wrap all the sections ABOVE the match list in a div with `className="sidebar-top"`.
-
-Find this line (should be right before the Matches heading):
-```
-{zoom>1&&<div className="sidebar-section">
-```
-
-Go up from there. You need to wrap everything from the first `<div className="sidebar-section"><h3>Filters</h3>` down to the end of the zoom section in one wrapper div.
-
-**Specifically, find:**
-```
-{activeTab==='explorer'&&<>
-        <div className="sidebar-section"><h3>Filters</h3>
-```
-
-**Replace the opening with:**
-```
-{activeTab==='explorer'&&<>
-       <div className="sidebar-top">
-        <div className="sidebar-section"><h3>Filters</h3>
-```
-
-**Then find the line just before the Matches heading:**
-```
-        <div className="sidebar-section" style={{padding:'6px 12px 2px'}}><h3>Matches ({filteredMatches.length})</h3></div>
-```
-
-**Add a closing `</div>` right before it:**
-```
-        </div>
-        <div className="sidebar-section" style={{padding:'6px 12px 2px'}}><h3>Matches ({filteredMatches.length})</h3></div>
 
 /* States */
 .loading-screen { display:flex; align-items:center; justify-content:center; height:100%; width:100%; color:#555; font-family:'JetBrains Mono',monospace; }
