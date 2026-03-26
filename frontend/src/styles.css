@@ -3,7 +3,7 @@ body { background:#0a0a0f; color:#ddd; font-family:'Inter',sans-serif; overflow:
 
 /* 3-column layout */
 .app { display:flex; height:100vh; width:100vw; }
-.sidebar { width:260px; min-width:260px; background:#111118; border-right:1px solid #1e1e28; display:flex; flex-direction:column; overflow:hidden; }
+.sidebar { width:260px; min-width:260px; background:#111118; border-right:1px solid #1e1e28; display:flex; flex-direction:column; overflow-y:auto; overflow-x:hidden; }
 .main { flex:1; display:flex; flex-direction:column; position:relative; overflow:hidden; min-width:0; }
 .insights-panel { width:270px; min-width:270px; background:#111118; border-left:1px solid #1e1e28; display:flex; flex-direction:column; overflow:hidden; }
 
@@ -17,6 +17,8 @@ body { background:#0a0a0f; color:#ddd; font-family:'Inter',sans-serif; overflow:
 .sidebar-scroll { flex:1; overflow-y:auto; }
 .sidebar-scroll::-webkit-scrollbar { width:3px; }
 .sidebar-scroll::-webkit-scrollbar-thumb { background:#2a2a35; border-radius:2px; }
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:#2a2a35; border-radius:2px; }
 
 /* Tabs */
 .tab-bar { display:flex; border-bottom:1px solid #1e1e28; }
