@@ -70,7 +70,7 @@ export default function App(){
   // Insights
   const[showInsights,setShowInsights]=useState(true)
 
-  // ── Load local data ──
+  //  Load local data 
   useEffect(()=>{
     Promise.all([
       fetch('./data/meta.json').then(r=>r.ok?r.json():null).catch(()=>null),
@@ -84,7 +84,7 @@ export default function App(){
     }).catch(()=>setLoading(false))
   },[])
 
-  // ── Load match ──
+  //  Load match 
   useEffect(()=>{
     if(!selectedMatch){setMatchData(null);return}
     setMatchLoading(true);setTimeProgress(1);setIsPlaying(false);setZoom(1);setPanX(0);setPanY(0)
@@ -99,7 +99,7 @@ export default function App(){
     fetch(`./data/matches/${s}.json`).then(r=>r.ok?r.json():null).then(d=>{setMatchData(d);setMatchLoading(false)}).catch(()=>{setMatchData(null);setMatchLoading(false)})
   },[selectedMatch,uploadJobId])
 
-  // ── Map image (dynamic: check uploaded maps first, then local) ──
+  //  Map image (dynamic: check uploaded maps first, then local) 
   const currentMap=activeTab==='analytics'?heatmapMap:(matchData?.map||(filterMap!=='all'?filterMap:(meta?.maps?.[0]||'AmbroseValley')))
   useEffect(()=>{
     // Try dynamic (uploaded) map first
@@ -121,16 +121,16 @@ export default function App(){
     const img=new Image();img.src=`./`+src;img.onload=()=>{mapImgRef.current=img;setImgTick(t=>t+1)}
   },[currentMap,dynamicMaps,uploadJobId])
 
-  // ── Resize (fill available space) ──
+  //  Resize (fill available space) 
   useEffect(()=>{const fn=()=>{if(!wrapperRef.current)return;const r=wrapperRef.current.getBoundingClientRect();setCanvasSize(Math.max(300,Math.min(r.width-8,r.height-8)))};fn();window.addEventListener('resize',fn);return()=>window.removeEventListener('resize',fn)},[showInsights])
 
-  // ── Zoom with bounds ──
+  //  Zoom with bounds 
   const handleWheel=useCallback(e=>{e.preventDefault();setZoom(z=>Math.max(1,Math.min(5,z+(e.deltaY>0?-0.15:0.15))))
     // Reset pan if zooming back to 1
     setZoom(z=>{if(z<=1){setPanX(0);setPanY(0)};return z})
   },[])
 
-  // ── Pan with bounds ──
+  //  Pan with bounds 
   const handleMouseDown=useCallback(e=>{if(zoom<=1)return;isPanning.current=true;panStart.current={x:e.clientX-panX,y:e.clientY-panY}},[zoom,panX,panY])
   const handleMouseMove=useCallback(e=>{
     if(isPanning.current){
@@ -152,14 +152,14 @@ export default function App(){
   },[matchData,canvasSize,zoom,panX,panY,visibleEvents])
   const handleMouseUp=useCallback(()=>{isPanning.current=false},[])
 
-  // ── Playback ──
+  //  Playback 
   useEffect(()=>{
     if(!isPlaying||!matchData)return;lastFrame.current=performance.now()
     const go=now=>{const dt=(now-lastFrame.current)/1000;lastFrame.current=now;setTimeProgress(p=>{const n=p+(dt*playSpeed)/5;if(n>=1){setIsPlaying(false);return 1}return n});animRef.current=requestAnimationFrame(go)}
     animRef.current=requestAnimationFrame(go);return()=>{if(animRef.current)cancelAnimationFrame(animRef.current)}
   },[isPlaying,matchData,playSpeed])
 
-  // ── Draw compass ──
+  //  Draw compass 
   const drawCompass=(ctx,size)=>{
     const cx=size-40,cy=40,r=18
     ctx.save()
@@ -179,7 +179,7 @@ export default function App(){
     ctx.globalAlpha=1.0;ctx.restore()
   }
 
-  // ── Render ──
+  //  Render 
   const render=useCallback(()=>{
     const c=canvasRef.current;if(!c)return;const ctx=c.getContext('2d');c.width=canvasSize;c.height=canvasSize
     ctx.clearRect(0,0,canvasSize,canvasSize);ctx.fillStyle='#08080c';ctx.fillRect(0,0,canvasSize,canvasSize)
@@ -232,7 +232,7 @@ export default function App(){
   },[canvasSize,matchData,heatmapData,heatmapType,heatmapMap,heatmapDay,currentMap,timeProgress,showHumanPaths,showBotPaths,visibleEvents,eventOpacity,heatmapOpacity,activeTab,imgTick,zoom,panX,panY])
   useEffect(()=>{render()},[render])
 
-  // ── Filtered ──
+  //  Filtered 
   const filteredMatches=useMemo(()=>{
     if(!matchIndex)return[]
     let r=matchIndex.filter(m=>{
@@ -254,7 +254,7 @@ export default function App(){
     return r
   },[matchIndex,filterMap,filterDay,searchQuery,filterStorm,filterHumanKills,filterPlayerKilled,sortBy])
 
-  // ── Stats ──
+  //  Stats 
   const stats=useMemo(()=>{
     if(activeTab==='analytics'&&matchIndex){
       const am=matchIndex.filter(m=>m.map===heatmapMap&&(heatmapDay==='all'||m.day===heatmapDay))
@@ -264,7 +264,7 @@ export default function App(){
     const fm=filteredMatches;return{label:'Total',matches:fm.length,kills:fm.reduce((s,m)=>s+m.kills,0),deaths:fm.reduce((s,m)=>s+m.deaths,0),storm:fm.reduce((s,m)=>s+(m.storm_deaths||0),0),loots:fm.reduce((s,m)=>s+(m.loots||0),0)}
   },[filteredMatches,selectedMatch,activeTab,matchIndex,heatmapMap,heatmapDay])
 
-  // ── Insights ──
+  //  Insights 
   const insights=useMemo(()=>{
     if(activeTab==='analytics')return generateHeatmapInsights(heatmapData,heatmapMap,heatmapDay==='all'?'all':heatmapDay,heatmapType)
     if(matchData)return generateMatchInsights(matchData)
@@ -274,7 +274,7 @@ export default function App(){
   const mapOptions=meta?.maps||['AmbroseValley','GrandRift','Lockdown']
   const dayOptions=meta?.days||[]
 
-  // ── Upload ──
+  //  Upload 
   const handleUpload=async(e)=>{
     const file=e.target.files?.[0];if(!file)return
     setUploadStatus('uploading');setUploadProgress(0);setUploadMsg('Uploading...')
